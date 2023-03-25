@@ -46,7 +46,7 @@ function openInNewTab(url) {
 }
 
 async function getPreviewData(url) {
-  let response = await fetch(`https://opengraph.io/api/1.1/site/${encodeURIComponent(url)}?app_id=ec3eb8e2-4697-47f9-acaf-cb3a567fde08`);
+  let response = await fetch(`https://opengraph.io/api/1.1/site/${encodeURIComponent(url)}?app_id=YOU_API_KEY_FROM_opengraph`);
   let data = await response.json();
   return {
     title: data.hybridGraph.title,
