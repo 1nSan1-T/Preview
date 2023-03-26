@@ -3,40 +3,22 @@
   "name": "Site Previewer",
   "version": "1.0",
   "description": "A preview utility for sites",
-  "icons": [
-    {
-      "src": "icon16.png",
-      "sizes": "16x16",
-      "type": "image/png"
-    },
-    {
-      "src": "icon32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "icon48.png",
-      "sizes": "48x48",
-      "type": "image/png"
-    },
-    {
-      "src": "icon128.png",
-      "sizes": "128x128",
-      "type": "image/png"
-    }
-  ],
-  "host_permissions": [
-    "<all_urls>"
-  ],
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
   "permissions": [
     "activeTab",
-    "storage"
+    "tabs",
+    "storage",
+    "https://*/*",
+    "scripting"
   ],
   "action": {
     "default_title": "Site Previewer",
-    "default_popup": {
-      "href": "popup.html"
-    },
+    "default_popup": "popup.html",
     "default_icon": {
       "16": "icon16.png",
       "32": "icon32.png",
@@ -44,18 +26,19 @@
       "128": "icon128.png"
     }
   },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'",
+    "sandbox": "sandbox allow-scripts allow-forms allow-popups"
+  },
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
       "js": [
-        {
-          "src": "content.js",
-          "injectInto": "content",
-          "runAt": "document_end"
-        }
-      ]
+        "content.js"
+      ],
+      "all_frames": true
     }
   ]
 }
