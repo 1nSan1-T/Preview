@@ -3,8 +3,13 @@ let longpressTimer;
 function startLongpressTimer() {
   longpressTimer = setTimeout(() => {
     let url = window.location.href;
-    let preview = getPreviewData(url);
-    showPreviewCard(url, preview);
+    getPreviewData(url)
+      .then((preview) => {
+        showPreviewCard(url, preview);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, 500);
 }
 
@@ -16,8 +21,13 @@ function handleClick(event) {
   let url = event.target.href;
   if (url) {
     event.preventDefault();
-    let preview = getPreviewData(url);
-    showPreviewCard(url, preview);
+    getPreviewData(url)
+      .then((preview) => {
+        showPreviewCard(url, preview);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 }
 
